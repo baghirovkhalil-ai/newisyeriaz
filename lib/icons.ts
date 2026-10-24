@@ -1,0 +1,20 @@
+// Sahələr üçün ikonlar (emoji — əlavə paket tələb etmir)
+export const categoryIcons: Record<string, string> = {
+  "satis-marketinq": "🛍️",
+  "kuryer-catdirilma": "🛵",
+  "xidmet-iase": "🍽️",
+  "ofis-inzibati": "🗂️",
+  "muhasibat-maliyye": "🧮",
+  "it-proqramlasdirma": "💻",
+  "dizayn-kreativ": "🎨",
+  "tehsil-terbiye": "🎓",
+  sehiyye: "🩺",
+  "insaat-temir": "🏗️",
+  "neqliyyat-logistika": "🚚",
+  "istehsalat-senaye": "🏭",
+  "muhafize-tehlukesizlik": "🛡️",
+  "turizm-otel": "🏨",
+  huquq: "⚖️",
+  "musteri-xidmetleri": "🎧",
+  "telebe-tecrube": "🧑‍🎓",
+};
