@@ -34,11 +34,10 @@ Real elanlarla açılışdan əvvəl Vercel-də `NEXT_PUBLIC_DEMO_MODE=false` ya
 - Baza (Supabase) qoşulanda vakansiya mətnləri üçün dilə görə sütunlar (`title_ru`, `title_en`...) və ya ayrıca tərcümə cədvəli lazım olacaq. İndi tərcümə yalnız nümunə datadadır.
 
 ## Görünüş rejimləri (tema)
-- 4 seçim: **Avto** (cihazın rejimi), **Açıq**, **Qara**, **Göy**. Header-dəki palitra düyməsindədir, seçim `localStorage`-də saxlanır.
-- Rənglər `app/globals.css`-də CSS dəyişənləridir (`:root`, `[data-theme="dark"]`, `[data-theme="blue"]`). Tailwind rəngləri `tailwind.config.ts`-də bu dəyişənlərə bağlıdır, ona görə komponentlərdə `bg-surface`, `text-ink`, `text-body`, `text-muted`, `text-on-brand` kimi adlardan istifadə et (`bg-white`, `text-slate-*` yox).
+- Yalnız 2 rejim: **Ağ** və **Qara**. Header-dəki günəş/ay düyməsi ilə keçilir, seçim `localStorage`-də saxlanır.
+- İlk girişdə cihazın rejimi götürülür. Köhnə «Göy» seçimi avtomatik Qaraya keçir.
+- Rənglər `app/globals.css`-də CSS dəyişənləridir (`:root` ağ, `[data-theme="dark"]` qara). Komponentlərdə `bg-surface`, `text-ink`, `text-body`, `text-muted`, `text-on-brand`, `gold` kimi adlardan istifadə et (`bg-white`, `text-slate-*` yox).
 - Səhifə çəkilməmişdən əvvəl `lib/theme.ts`-dəki kiçik skript temanı qoyur, ona görə yanıb-sönmə olmur.
-- Loqo (`components/Logo.tsx`) rəngləri temadan alır.
-- **Yeni tema əlavə etmək:** `globals.css`-ə `[data-theme="ad"]` bloku yaz, `lib/theme.ts`-də `themeOptions`, `THEME_COLORS` və `ThemeSwitcher.tsx`-də `swatch`-a əlavə et, 3 dilin `theme` mətnlərinə də yaz.
 
 ## Animasiyalar
 - Hamısı CSS və kiçik client komponentlərdir, əlavə paket yoxdur. Keyframe-lər `tailwind.config.ts`-dədir.

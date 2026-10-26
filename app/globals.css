@@ -26,43 +26,24 @@
 [data-theme="dark"] {
   color-scheme: dark;
   --brand: 77 180 247;
-  --brand-dark: 147 205 250;
-  --soft: 20 28 44;
-  --line: 38 50 74;
-  --surface: 11 15 25;
-  --ink: 241 245 249;
-  --body: 203 213 225;
-  --muted: 148 163 184;
-  --faint: 100 116 139;
+  --brand-dark: 140 202 250;
+  --soft: 23 23 26;
+  --line: 44 44 50;
+  --surface: 10 10 10;
+  --ink: 245 245 245;
+  --body: 212 212 216;
+  --muted: 161 161 170;
+  --faint: 113 113 122;
   --on-brand: 6 20 38;
-  --warn-bg: 48 36 12;
+  --warn-bg: 40 32 10;
   --warn: 253 224 71;
-  --danger-bg: 58 20 24;
+  --danger-bg: 50 18 20;
   --danger: 252 165 165;
   --gold: 250 204 80;
-  --gold-soft: 45 36 12;
+  --gold-soft: 34 29 14;
   --gold-line: 120 92 24;
 }
-[data-theme="blue"] {
-  color-scheme: dark;
-  --brand: 90 196 255;
-  --brand-dark: 190 230 255;
-  --soft: 16 54 92;
-  --line: 34 84 130;
-  --surface: 9 36 66;
-  --ink: 240 249 255;
-  --body: 207 228 245;
-  --muted: 150 186 215;
-  --faint: 105 145 178;
-  --on-brand: 5 28 52;
-  --warn-bg: 60 48 16;
-  --warn: 253 224 71;
-  --danger-bg: 70 24 40;
-  --danger: 254 178 178;
-  --gold: 252 211 77;
-  --gold-soft: 52 50 30;
-  --gold-line: 140 112 40;
-}
+
 
 html { scroll-behavior: smooth; }
 body { @apply bg-surface text-ink antialiased; overflow-x: clip; }

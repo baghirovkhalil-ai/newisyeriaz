@@ -11,7 +11,7 @@ const az = {
     backToTop: "Yuxarı qayıt",
     mobileNavAria: "Əsas naviqasiya",
   },
-  theme: { title: "Rəng rejimi seç", label: "Görünüş", auto: "Avto", light: "Açıq", dark: "Qara", blue: "Göy" },
+  theme: { title: "Rejimi dəyiş", label: "Görünüş", light: "Ağ", dark: "Qara" },
   nav: {
     vacancies: "Vakansiyalar",
     remote: "Uzaqdan",
@@ -283,7 +283,7 @@ const ru: Dict = {
     backToTop: "Наверх",
     mobileNavAria: "Основная навигация",
   },
-  theme: { title: "Выбрать оформление", label: "Оформление", auto: "Авто", light: "Светлая", dark: "Тёмная", blue: "Синяя" },
+  theme: { title: "Сменить тему", label: "Оформление", light: "Светлая", dark: "Тёмная" },
   nav: {
     vacancies: "Вакансии",
     remote: "Удалённо",
@@ -553,7 +553,7 @@ const en: Dict = {
     backToTop: "Back to top",
     mobileNavAria: "Main navigation",
   },
-  theme: { title: "Choose appearance", label: "Appearance", auto: "Auto", light: "Light", dark: "Dark", blue: "Blue" },
+  theme: { title: "Switch theme", label: "Appearance", light: "Light", dark: "Dark" },
   nav: {
     vacancies: "Jobs",
     remote: "Remote",

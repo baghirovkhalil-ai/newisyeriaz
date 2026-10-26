@@ -1,5 +1,10 @@
 # Dəyişikliklər
 
+## 0.7.1 — İki rejim: Ağ və Qara
+- «Avto» və «Göy» rejimləri silindi; menyu əvəzinə günəş/ay düyməsi.
+- Qara rejim göyümtül tonlardan neytral qaraya keçirildi.
+- İlk girişdə cihazın rejimi götürülür; köhnə «Göy» seçimi Qaraya keçir.
+
 ## 0.7.0 — Blog
 - Yeni bölmə `/blog` (3 dildə): kateqoriyalar (İş axtaranlar / İşəgötürənlər), önə çıxan yazı, kartlar.
 - 6 məqalə: CV necə yazılır, müsahibə sualları, maaş danışığı, uzaqdan iş, vakansiya elanı necə yazılır, tələbələr üçün iş.
