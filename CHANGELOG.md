@@ -1,5 +1,14 @@
 # Dəyişikliklər
 
+## 0.6.0 — Gold / Premium / İrəli çək, CV bazası, kartla ödəniş
+- Elan və CV üçün önə çıxarma (`lib/boosts.ts`): İrəli çək 1 ₼, Premium 3 ₼/7 gün, Gold 6 ₼/7 gün; CV üçün 0.5 / 2 / 4 ₼.
+- Sıralama: Gold → Premium → adi; eyni səviyyədə son irəli çəkilən yuxarıda. Kartlarda Gold (qızılı çərçivə) və Premium nişanları.
+- Ana səhifədə ayrıca «Gold vakansiyalar» bloku və Gold namizədlər.
+- Yeni səhifələr: `/cv-bazasi` (axtarış, sahə, şəhər), `/cv/[slug]` (noindex, nömrə kliklə açılır), `/cv-yerlesdir`, `/one-cixar` (ödəniş).
+- Ödəniş: kartdan karta köçürmə + çek şəkli. `/api/receipt` çeki Gemini ilə oxuyur (dəqiq tarix-saat, məbləğ, alıcı kartın son 4 rəqəmi, status, son 48 saat, təkrar çek) və Telegram-a göndərir.
+- Qiymətlər səhifəsində «Elanı və CV-ni önə çıxar» bölməsi; elan və CV göndəriləndən sonra önə çıxarma təklifi.
+- Menyuda «CV bazası». 3 dildə mətnlər `lib/dict-extra.ts`-dədir.
+
 ## 0.5.0 — CV yarat, yeni qiymətlər
 - Yeni səhifə `/cv-yarat` (3 dildə): 4 nümunə CV (satış, mühasib, İT, kuryer), CV üçün 5 məsləhət.
 - "CV yarat" düymələri KarYera AI-a (karyera-ai.vercel.app) aparır, UTM ilə (`utm_source=isyeri`). Linki `NEXT_PUBLIC_KARYERA_URL` ilə dəyişmək olar.

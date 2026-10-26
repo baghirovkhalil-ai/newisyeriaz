@@ -19,6 +19,9 @@
   --warn: 146 64 14;
   --danger-bg: 254 242 242;
   --danger: 185 28 28;
+  --gold: 180 120 8;
+  --gold-soft: 254 248 225;
+  --gold-line: 240 200 110;
 }
 [data-theme="dark"] {
   color-scheme: dark;
@@ -36,6 +39,9 @@
   --warn: 253 224 71;
   --danger-bg: 58 20 24;
   --danger: 252 165 165;
+  --gold: 250 204 80;
+  --gold-soft: 45 36 12;
+  --gold-line: 120 92 24;
 }
 [data-theme="blue"] {
   color-scheme: dark;
@@ -53,6 +59,9 @@
   --warn: 253 224 71;
   --danger-bg: 70 24 40;
   --danger: 254 178 178;
+  --gold: 252 211 77;
+  --gold-soft: 52 50 30;
+  --gold-line: 140 112 40;
 }
 
 html { scroll-behavior: smooth; }
@@ -89,6 +98,10 @@ html[data-scrolled] .site-header { box-shadow: 0 8px 24px -14px rgb(var(--brand)
   -webkit-mask-image: linear-gradient(to bottom, #000, transparent 85%);
   mask-image: linear-gradient(to bottom, #000, transparent 85%);
 }
+
+/* Gold kartın parıltısı (bir dəfə, hover-da) */
+.gold-shine { background: linear-gradient(110deg, transparent 35%, rgb(var(--gold) / 0.18) 50%, transparent 65%); background-size: 250% 100%; background-position: 120% 0; transition: background-position .9s ease; }
+.group:hover .gold-shine { background-position: -40% 0; }
 
 /* loqo */
 .logo-part { transform-box: fill-box; transform-origin: center bottom; }

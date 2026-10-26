@@ -22,6 +22,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...entry("/vakansiyalar", { changeFrequency: "hourly", priority: 0.9 }),
     ...entry("/cv-yarat", { changeFrequency: "monthly", priority: 0.7 }),
     ...entry("/qiymetler", { changeFrequency: "monthly", priority: 0.6 }),
+    ...entry("/cv-bazasi", { changeFrequency: "daily", priority: 0.7 }),
+    ...entry("/cv-yerlesdir", { changeFrequency: "monthly", priority: 0.6 }),
     ...combos.flatMap((c) => entry(`/is-elanlari/${c.city}/${c.category}`, { changeFrequency: "daily", priority: 0.7 })),
     ...vacancies.flatMap((v) => entry(`/vakansiya/${v.slug}`, { lastModified: v.publishedAt, priority: 0.8 })),
   ];

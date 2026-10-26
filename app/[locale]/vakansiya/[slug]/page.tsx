@@ -8,6 +8,9 @@ import { formatDate, formatSalary, jobPostingJsonLd } from "@/lib/seo";
 import Reveal from "@/components/Reveal";
 import ShareButton from "@/components/ShareButton";
 import VacancyCard from "@/components/VacancyCard";
+import TierBadge from "@/components/TierBadge";
+import { getExtra } from "@/lib/dict-extra";
+import { BOOSTS, fmtPrice } from "@/lib/boosts";
 
 type Props = { params: { locale: Locale; slug: string } };
 
@@ -27,6 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function VacancyPage({ params }: Props) {
   const { locale } = params;
   const t = getDict(locale);
+  const x = getExtra(locale);
   const v = await getVacancyBySlug(locale, params.slug);
   if (!v) notFound();
 
@@ -42,7 +46,8 @@ export default async function VacancyPage({ params }: Props) {
         <Link href={localePath(locale, `/is-elanlari/${v.city.slug}/${v.category.slug}`)} className="hover:underline">{v.category.name}</Link>
       </nav>
 
-      <header className="animate-fade-up rounded-2xl bg-brand-soft p-5">
+      <header className={`animate-fade-up rounded-2xl p-5 ${v.tier === "gold" ? "border-2 border-gold-line bg-gold-soft" : "bg-brand-soft"}`}>
+        {v.tier && <TierBadge tier={v.tier} label={x.card[v.tier]} className="mb-2" />}
         <h1 className="text-2xl font-medium text-brand-dark">{v.title}</h1>
         <p className="mt-1 text-body">{v.company.name}</p>
         <p className="mt-3 text-lg font-medium">{formatSalary(t.salary, v.salaryMin, v.salaryMax)}</p>
@@ -58,6 +63,15 @@ export default async function VacancyPage({ params }: Props) {
           <ShareButton title={v.title} label={t.vacancy.share} doneLabel={t.vacancy.copied} />
         </div>
       </header>
+
+      {v.tier !== "gold" && (
+        <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-dashed border-gold-line px-4 py-3 text-sm">
+          <span className="text-body">{x.boost.ownerVacancy}</span>
+          <Link href={`${localePath(locale, "/one-cixar")}?type=vacancy&plan=premium&item=${encodeURIComponent(`${v.title} — ${v.company.name}`)}`} className="font-medium text-gold hover:underline">
+            {x.boost.ctaVacancy} · {fmt(x.boost.fromPrice, { p: fmtPrice(BOOSTS.vacancy.bump.price) })}
+          </Link>
+        </div>
+      )}
 
       <section>
         <h2 className="mb-2 text-lg font-medium">{t.vacancy.description}</h2>

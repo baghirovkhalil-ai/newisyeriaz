@@ -5,6 +5,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { localePath, type Locale } from "@/lib/i18n";
 import type { Dict } from "@/lib/dictionaries";
+import { getExtra } from "@/lib/dict-extra";
 
 export default function Header({ locale, t }: { locale: Locale; t: Dict }) {
   return (
@@ -14,7 +15,8 @@ export default function Header({ locale, t }: { locale: Locale; t: Dict }) {
         <nav className="flex items-center gap-2 text-sm sm:gap-4">
           <Link href={localePath(locale, "/vakansiyalar")} className="hidden text-body transition hover:text-brand-dark md:block">{t.nav.vacancies}</Link>
           <Link href={localePath(locale, "/vakansiyalar") + "?schedule=remote"} className="hidden text-body transition hover:text-brand-dark md:block">{t.nav.remote}</Link>
-          <Link href={localePath(locale, "/cv-yarat")} className="hidden text-body transition hover:text-brand-dark md:block">{t.nav.cv}</Link>
+          <Link href={localePath(locale, "/cv-bazasi")} className="hidden text-body transition hover:text-brand-dark md:block">{getExtra(locale).nav.cvdb}</Link>
+          <Link href={localePath(locale, "/cv-yarat")} className="hidden text-body transition hover:text-brand-dark lg:block">{t.nav.cv}</Link>
           <Link href={localePath(locale, "/qiymetler")} className="hidden text-body transition hover:text-brand-dark md:block">{t.nav.pricing}</Link>
           <Suspense fallback={null}><LanguageSwitcher locale={locale} label={t.site.langLabel} /></Suspense>
           <ThemeSwitcher t={t.theme} />

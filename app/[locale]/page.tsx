@@ -7,6 +7,9 @@ import CountUp from "@/components/CountUp";
 import { karyeraLink } from "@/lib/cv-samples";
 import { getCategories, getCategoryCounts, getCities, getVacancies } from "@/lib/data";
 import { getDict } from "@/lib/dictionaries";
+import { getExtra } from "@/lib/dict-extra";
+import { getCandidates } from "@/lib/candidates";
+import CandidateCard from "@/components/CandidateCard";
 import { categoryIcons } from "@/lib/icons";
 import { alternates, localePath, type Locale } from "@/lib/i18n";
 
@@ -19,7 +22,11 @@ export function generateMetadata({ params }: Props): Metadata {
 export default async function Home({ params }: Props) {
   const locale = params.locale;
   const t = getDict(locale);
-  const [categories, cities, all, counts] = await Promise.all([getCategories(locale), getCities(locale), getVacancies(locale), getCategoryCounts()]);
+  const x = getExtra(locale);
+  const [categories, cities, all, counts, cands] = await Promise.all([getCategories(locale), getCities(locale), getVacancies(locale), getCategoryCounts(), getCandidates(locale)]);
+  const gold = all.filter((v) => v.tier === "gold");
+  const rest = all.filter((v) => v.tier !== "gold");
+  const goldCands = cands.filter((c) => c.tier === "gold").slice(0, 2);
   const list = localePath(locale, "/vakansiyalar");
   const stats = [
     { n: all.length, label: t.home.stats.jobs },
@@ -53,6 +60,23 @@ export default async function Home({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {gold.length > 0 && (
+        <section aria-labelledby="gold-h" className="rounded-2xl border-2 border-gold-line bg-gold-soft/40 p-4 sm:p-5">
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+            <h2 id="gold-h" className="flex items-center gap-2 text-lg font-medium">
+              <svg width="20" height="20" viewBox="0 0 24 24" className="fill-gold" aria-hidden="true"><path d="M3 8l4.5 4L12 4l4.5 8L21 8l-2 11H5z" /></svg>
+              {x.home.goldTitle}
+            </h2>
+            <Link href={`${localePath(locale, "/one-cixar")}?type=vacancy&plan=gold`} className="text-sm font-medium text-gold hover:underline">{x.home.goldCta} →</Link>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {gold.slice(0, 6).map((v, i) => (
+              <Reveal key={v.id} delay={(i % 2) * 80} className="h-full"><VacancyCard v={v} locale={locale} t={t} /></Reveal>
+            ))}
+          </div>
+        </section>
+      )}
 
       <Reveal>
         <section>
@@ -90,7 +114,7 @@ export default async function Home({ params }: Props) {
           </div>
         </Reveal>
         <div className="grid gap-3 sm:grid-cols-2">
-          {all.slice(0, 10).map((v, i) => (
+          {rest.slice(0, 10).map((v, i) => (
             <Reveal key={v.id} delay={(i % 2) * 80} className="h-full"><VacancyCard v={v} locale={locale} t={t} /></Reveal>
           ))}
         </div>
@@ -112,6 +136,26 @@ export default async function Home({ params }: Props) {
             <a href={karyeraLink("home_banner")} target="_blank" rel="noopener" className="inline-block rounded-lg bg-brand px-5 py-3 text-sm font-medium text-on-brand transition hover:opacity-90 active:scale-95">{t.home.cvBtn} ↗</a>
             <Link href={localePath(locale, "/cv-yarat")} className="inline-block rounded-lg border border-brand bg-surface px-5 py-3 text-sm font-medium text-brand-dark transition hover:bg-surface/70 active:scale-95">{t.home.cvSamples}</Link>
           </div>
+        </section>
+      </Reveal>
+
+      <Reveal>
+        <section className="rounded-2xl border border-brand-line p-5 sm:p-6">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="text-lg font-medium">{x.home.cvdbTitle}</h2>
+              <p className="mt-1 text-sm text-body">{x.home.cvdbText}</p>
+            </div>
+            <div className="flex shrink-0 flex-wrap gap-2">
+              <Link href={localePath(locale, "/cv-bazasi")} className="inline-block rounded-lg bg-brand px-5 py-3 text-sm font-medium text-on-brand transition hover:opacity-90 active:scale-95">{x.home.cvdbBtn}</Link>
+              <Link href={localePath(locale, "/cv-yerlesdir")} className="inline-block rounded-lg border border-brand px-5 py-3 text-sm font-medium text-brand-dark transition hover:bg-brand-soft active:scale-95">{x.home.cvdbPost}</Link>
+            </div>
+          </div>
+          {goldCands.length > 0 && (
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {goldCands.map((c) => <CandidateCard key={c.id} c={c} locale={locale} t={t} x={x} />)}
+            </div>
+          )}
         </section>
       </Reveal>
 

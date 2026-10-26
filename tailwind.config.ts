@@ -19,6 +19,7 @@ const config: Config = {
         warn: c("warn"),
         "danger-bg": c("danger-bg"),
         danger: c("danger"),
+        gold: { DEFAULT: c("gold"), soft: c("gold-soft"), line: c("gold-line") },
       },
       keyframes: {
         float: { "0%,100%": { transform: "translate3d(0,0,0) scale(1)" }, "50%": { transform: "translate3d(22px,-26px,0) scale(1.1)" } },

@@ -5,6 +5,7 @@ import { getBakuDistricts, getCategories, getCities } from "@/lib/data";
 import { getDict } from "@/lib/dictionaries";
 import { alternates, fmt, localePath, type Locale } from "@/lib/i18n";
 import { isPlan } from "@/lib/plans";
+import { getExtra } from "@/lib/dict-extra";
 
 export function generateMetadata({ params }: { params: { locale: Locale } }): Metadata {
   const t = getDict(params.locale);
@@ -36,6 +37,8 @@ export default async function PostPage({ params, searchParams }: { params: { loc
         cities={cities.map((c) => ({ value: c.slug, label: c.name }))}
         schedules={Object.entries(t.schedule).map(([value, label]) => ({ value, label }))}
         districts={districts}
+        x={getExtra(locale)}
+        locale={locale}
       />
     </div>
   );

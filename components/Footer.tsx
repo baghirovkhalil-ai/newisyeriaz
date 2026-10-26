@@ -4,6 +4,7 @@ import Reveal from "./Reveal";
 import SubscribeForm from "./SubscribeForm";
 import { getCategories, getCities } from "@/lib/data";
 import type { Dict } from "@/lib/dictionaries";
+import { getExtra } from "@/lib/dict-extra";
 import { categoryIcons } from "@/lib/icons";
 import { localePath, type Locale } from "@/lib/i18n";
 
@@ -71,6 +72,8 @@ export default async function Footer({ locale, t }: { locale: Locale; t: Dict })
             <ul>
               <li><Link href={p("/elan-yerlesdir")} className={link}>{t.nav.post}</Link></li>
               <li><Link href={p("/qiymetler")} className={link}>{t.nav.pricing}</Link></li>
+              <li><Link href={p("/cv-bazasi")} className={link}>{getExtra(locale).nav.cvdb}</Link></li>
+              <li><Link href={`${p("/qiymetler")}#one-cixar`} className={link}>{getExtra(locale).boost.ctaVacancy}</Link></li>
               <li><Link href={`${list}?schedule=remote`} className={link}>{t.footer.remote}</Link></li>
               <li><Link href={`${list}?schedule=part_time`} className={link}>{t.footer.partTime}</Link></li>
             </ul>

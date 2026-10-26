@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import PricingTable from "@/components/PricingTable";
 import Reveal from "@/components/Reveal";
 import { getDict } from "@/lib/dictionaries";
+import { getExtra } from "@/lib/dict-extra";
+import BoostOptions from "@/components/BoostOptions";
 import { alternates, type Locale } from "@/lib/i18n";
 
 export function generateMetadata({ params }: { params: { locale: Locale } }): Metadata {
@@ -12,6 +14,7 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
 export default function PricingPage({ params }: { params: { locale: Locale } }) {
   const locale = params.locale;
   const t = getDict(locale).pricing;
+  const x = getExtra(locale);
 
   return (
     <div className="space-y-12">
@@ -22,6 +25,21 @@ export default function PricingPage({ params }: { params: { locale: Locale } }) 
 
       <PricingTable t={t} locale={locale} />
       <p className="-mt-6 text-center text-xs text-muted">{t.demoNote}</p>
+
+      <section id="one-cixar" className="scroll-mt-20 space-y-8">
+        <header className="mx-auto max-w-2xl text-center">
+          <h2 className="text-2xl font-medium">{x.boost.pricingTitle}</h2>
+          <p className="mt-2 text-body">{x.boost.pricingSub}</p>
+        </header>
+        <div>
+          <h3 className="mb-4 text-lg font-medium">{x.boost.tabVacancy}</h3>
+          <BoostOptions target="vacancy" locale={locale} x={x} />
+        </div>
+        <div>
+          <h3 className="mb-4 text-lg font-medium">{x.boost.tabCv}</h3>
+          <BoostOptions target="cv" locale={locale} x={x} />
+        </div>
+      </section>
 
       <Reveal>
         <section className="mx-auto max-w-2xl">

@@ -1,6 +1,7 @@
 import type { Locale } from "./i18n";
 import { normalize } from "./i18n";
 import { categoryNames, cityNames, districtNames, templateTr } from "./content-i18n";
+import { byTier, type Tier } from "./boosts";
 
 export type Schedule = "full_time" | "part_time" | "shift" | "remote" | "internship";
 
@@ -23,7 +24,10 @@ export interface Vacancy {
   experienceYears: number;
   contactPhone?: string;
   contactTelegram?: string;
-  isFeatured?: boolean;
+  /** Ödənişli önə çıxarma: gold > premium > adi */
+  tier?: Tier;
+  /** Son «İrəli çək» vaxtı */
+  bumpedAt?: string;
   publishedAt: string;
   expiresAt: string;
   tpl?: number;
@@ -144,7 +148,8 @@ const vacancies: Vacancy[] = Array.from({ length: templates.length * 3 }, (_, i)
     experienceYears: exp,
     contactPhone: i % 3 === 2 ? undefined : `+9945000000${pad2(i)}`,
     contactTelegram: i % 3 === 0 ? "demo_hr" : undefined,
-    isFeatured: i % 9 === 0,
+    tier: i % 16 === 0 ? "gold" : i % 11 === 3 ? "premium" : undefined,
+    bumpedAt: i % 11 === 5 ? new Date(Date.now() - ((i * 37) % 20) * 3600000).toISOString() : undefined,
     publishedAt: daysAgo(age),
     expiresAt: inDays(30 - age),
   };
@@ -189,7 +194,7 @@ export async function getVacancies(locale: Locale, f: Filters = {}): Promise<Vac
       return true;
     })
     .map((raw) => toView(raw, locale))
-    .sort((a, b) => Number(!!b.isFeatured) - Number(!!a.isFeatured) || +new Date(b.publishedAt) - +new Date(a.publishedAt));
+    .sort(byTier);
 }
 
 export async function getVacancyBySlug(locale: Locale, slug: string) {

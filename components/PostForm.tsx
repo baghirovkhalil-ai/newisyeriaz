@@ -3,6 +3,9 @@
 import { useState } from "react";
 import type { Dict } from "@/lib/dictionaries";
 import { formatSalary } from "@/lib/seo";
+import BoostOptions from "./BoostOptions";
+import type { Extra } from "@/lib/dict-extra";
+import type { Locale } from "@/lib/i18n";
 
 interface Opt { value: string; label: string }
 interface Props {
@@ -13,6 +16,8 @@ interface Props {
   cities: Opt[];
   schedules: Opt[];
   districts: Opt[];
+  x?: Extra;
+  locale?: Locale;
 }
 
 const empty = {
@@ -49,7 +54,7 @@ function Field({ label, error, hint, children }: { label: string; error?: string
   );
 }
 
-export default function PostForm({ t, salaryT, todayLabel, categories, cities, schedules, districts }: Props) {
+export default function PostForm({ t, salaryT, todayLabel, categories, cities, schedules, districts, x, locale }: Props) {
   const [f, setF] = useState<Form>(empty);
   const [errors, setErrors] = useState<Partial<Record<keyof Form, string>>>({});
   const [busy, setBusy] = useState(false);
@@ -82,6 +87,7 @@ export default function PostForm({ t, salaryT, todayLabel, categories, cities, s
 
   if (done) {
     return (
+      <>
       <div className="animate-fade-up rounded-2xl bg-brand-soft p-6 text-center">
         <svg className="mx-auto mb-3" width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
           <circle cx="32" cy="32" r="28" pathLength={1} strokeDasharray={1} className="animate-draw-circle stroke-brand" strokeWidth="3" strokeLinecap="round" />
@@ -91,6 +97,14 @@ export default function PostForm({ t, salaryT, todayLabel, categories, cities, s
         <p className="mx-auto mt-2 max-w-md text-body">{t.doneText}</p>
         <button onClick={() => { setF(empty); setDone(false); }} className="mt-4 rounded-lg bg-brand px-5 py-2.5 text-sm font-medium text-on-brand">{t.newPost}</button>
       </div>
+      {x && locale && (
+        <section className="mt-6">
+          <h2 className="text-lg font-medium">{x.postBoost.title}</h2>
+          <p className="mb-3 text-sm text-body">{x.postBoost.text}</p>
+          <BoostOptions target="vacancy" locale={locale} x={x} item={`${f.title.trim()} — ${f.companyName.trim()}`} compact />
+        </section>
+      )}
+      </>
     );
   }
 

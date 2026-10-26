@@ -59,3 +59,15 @@ Real elanlarla açılışdan əvvəl Vercel-də `NEXT_PUBLIC_DEMO_MODE=false` ya
 - `/vakansiyalar` səhifəsində bütün sahələr çip kimi (telefonda 2 sıralı sürüşmə, kompüterdə hamısı görünür).
 - Giriş xanalarının şrifti telefonda 16px (iPhone-da fokusda yaxınlaşma olmasın), toxunma sahələri böyüdülüb.
 - iPhone-un alt zolağı üçün `safe-area` nəzərə alınıb.
+
+## Önə çıxarma və ödəniş (Gold / Premium / İrəli çək)
+- Qiymətlər və müddətlər: `lib/boosts.ts` (`BOOSTS`). Server də oradan oxuyur.
+- Ödəniş: istifadəçi `/one-cixar` səhifəsində xidməti seçir, karta köçürür, çekin şəklini yükləyir. `POST /api/receipt` çeki Gemini ilə yoxlayır.
+- Vercel Environment Variables:
+  - `GEMINI_API_KEY` — çeki oxumaq üçün (vacib)
+  - `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` — hər çek şəkli ilə Telegram-a gəlsin
+  - `NEXT_PUBLIC_PAY_CARD` — kart nömrəsini dəyişmək üçün (istəyə bağlı)
+- **Hələ baza yoxdur:** ödəniş təsdiqlənir və Telegram-a gəlir, amma elanın Gold/Premium olması avtomatik saxlanmır. Supabase qoşulanda `tier`, `tier_until`, `bumped_at` sahələri yazılacaq.
+
+## CV bazası
+- `/cv-bazasi`, `/cv/[slug]`, `/cv-yerlesdir`. Nümunə namizədlər `lib/candidates.ts`-dədir. CV səhifələri şəxsi məlumat olduğu üçün `noindex`-dir.
