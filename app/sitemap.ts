@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getNonEmptyCombos, getVacancySlugs } from "@/lib/data";
+import { getPostSlugs } from "@/lib/blog";
 import { defaultLocale, localePath, locales } from "@/lib/i18n";
 import { SITE_URL } from "@/lib/seo";
 
@@ -24,6 +25,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...entry("/qiymetler", { changeFrequency: "monthly", priority: 0.6 }),
     ...entry("/cv-bazasi", { changeFrequency: "daily", priority: 0.7 }),
     ...entry("/cv-yerlesdir", { changeFrequency: "monthly", priority: 0.6 }),
+    ...entry("/blog", { changeFrequency: "weekly", priority: 0.7 }),
+    ...getPostSlugs().flatMap((b) => entry(`/blog/${b.slug}`, { lastModified: b.date, changeFrequency: "monthly", priority: 0.7 })),
     ...combos.flatMap((c) => entry(`/is-elanlari/${c.city}/${c.category}`, { changeFrequency: "daily", priority: 0.7 })),
     ...vacancies.flatMap((v) => entry(`/vakansiya/${v.slug}`, { lastModified: v.publishedAt, priority: 0.8 })),
   ];

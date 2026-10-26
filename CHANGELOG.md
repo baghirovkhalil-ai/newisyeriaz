@@ -1,5 +1,12 @@
 # Dəyişikliklər
 
+## 0.7.0 — Blog
+- Yeni bölmə `/blog` (3 dildə): kateqoriyalar (İş axtaranlar / İşəgötürənlər), önə çıxan yazı, kartlar.
+- 6 məqalə: CV necə yazılır, müsahibə sualları, maaş danışığı, uzaqdan iş, vakansiya elanı necə yazılır, tələbələr üçün iş.
+- Məqalə səhifəsi: mündəricat, məsləhət blokları, CV yarat / Elan yerləşdir / Gold kimi çağırış blokları, paylaş düyməsi, oxşar yazılar.
+- SEO: BlogPosting və BreadcrumbList schema, hreflang, OpenGraph article, sitemap-də bütün yazılar.
+- Menyu, footer və ana səhifədə «Bloqdan» bölməsi.
+
 ## 0.6.0 — Gold / Premium / İrəli çək, CV bazası, kartla ödəniş
 - Elan və CV üçün önə çıxarma (`lib/boosts.ts`): İrəli çək 1 ₼, Premium 3 ₼/7 gün, Gold 6 ₼/7 gün; CV üçün 0.5 / 2 / 4 ₼.
 - Sıralama: Gold → Premium → adi; eyni səviyyədə son irəli çəkilən yuxarıda. Kartlarda Gold (qızılı çərçivə) və Premium nişanları.

@@ -71,3 +71,8 @@ Real elanlarla açılışdan əvvəl Vercel-də `NEXT_PUBLIC_DEMO_MODE=false` ya
 
 ## CV bazası
 - `/cv-bazasi`, `/cv/[slug]`, `/cv-yerlesdir`. Nümunə namizədlər `lib/candidates.ts`-dədir. CV səhifələri şəxsi məlumat olduğu üçün `noindex`-dir.
+
+## Blog
+- Məqalələr `lib/blog/`-dadır: `index.ts` (slug, kateqoriya, tarix, ikon, rəng), `posts-az.ts`, `posts-ru.ts`, `posts-en.ts` (mətn).
+- Mətn bloklarla yazılır: `p` (abzas), `h` (başlıq, mündəricata düşür), `ul`/`ol` (siyahı), `tip` (məsləhət), `quote` (nümunə), `cta` (çağırış: `cv`, `interview`, `jobs`, `remote`, `post`, `boost`, `cvdb`, `cvpost`).
+- **Yeni məqalə əlavə etmək:** `index.ts`-də `metas` siyahısına yaz, sonra 3 dil faylında eyni slug ilə mətni əlavə et. Hansısa dildə mətn yoxdursa, yazı o dildə avtomatik gizlənir. Sitemap özü yenilənir.

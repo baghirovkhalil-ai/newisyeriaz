@@ -10,6 +10,8 @@ import { getDict } from "@/lib/dictionaries";
 import { getExtra } from "@/lib/dict-extra";
 import { getCandidates } from "@/lib/candidates";
 import CandidateCard from "@/components/CandidateCard";
+import { PostCard } from "@/components/BlogParts";
+import { getPosts } from "@/lib/blog";
 import { categoryIcons } from "@/lib/icons";
 import { alternates, localePath, type Locale } from "@/lib/i18n";
 
@@ -158,6 +160,18 @@ export default async function Home({ params }: Props) {
           )}
         </section>
       </Reveal>
+
+      <section>
+        <Reveal>
+          <div className="mb-3 flex items-baseline justify-between">
+            <h2 className="text-lg font-medium">{x.blog.latest}</h2>
+            <Link href={localePath(locale, "/blog")} className="text-sm text-brand-dark hover:underline">{x.blog.latestAll}</Link>
+          </div>
+        </Reveal>
+        <div className="grid gap-4 sm:grid-cols-3">
+          {getPosts(locale).slice(0, 3).map((p, i) => <Reveal key={p.slug} delay={i * 70} className="h-full"><PostCard p={p} locale={locale} x={x} /></Reveal>)}
+        </div>
+      </section>
 
       <Reveal>
         <section className="relative overflow-hidden rounded-2xl border border-brand-line p-6 text-center">

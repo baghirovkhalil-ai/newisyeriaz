@@ -73,6 +73,7 @@ export default async function Footer({ locale, t }: { locale: Locale; t: Dict })
               <li><Link href={p("/elan-yerlesdir")} className={link}>{t.nav.post}</Link></li>
               <li><Link href={p("/qiymetler")} className={link}>{t.nav.pricing}</Link></li>
               <li><Link href={p("/cv-bazasi")} className={link}>{getExtra(locale).nav.cvdb}</Link></li>
+              <li><Link href={p("/blog")} className={link}>{getExtra(locale).blog.nav}</Link></li>
               <li><Link href={`${p("/qiymetler")}#one-cixar`} className={link}>{getExtra(locale).boost.ctaVacancy}</Link></li>
               <li><Link href={`${list}?schedule=remote`} className={link}>{t.footer.remote}</Link></li>
               <li><Link href={`${list}?schedule=part_time`} className={link}>{t.footer.partTime}</Link></li>

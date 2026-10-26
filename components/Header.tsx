@@ -16,8 +16,9 @@ export default function Header({ locale, t }: { locale: Locale; t: Dict }) {
           <Link href={localePath(locale, "/vakansiyalar")} className="hidden text-body transition hover:text-brand-dark md:block">{t.nav.vacancies}</Link>
           <Link href={localePath(locale, "/vakansiyalar") + "?schedule=remote"} className="hidden text-body transition hover:text-brand-dark md:block">{t.nav.remote}</Link>
           <Link href={localePath(locale, "/cv-bazasi")} className="hidden text-body transition hover:text-brand-dark md:block">{getExtra(locale).nav.cvdb}</Link>
-          <Link href={localePath(locale, "/cv-yarat")} className="hidden text-body transition hover:text-brand-dark lg:block">{t.nav.cv}</Link>
+          <Link href={localePath(locale, "/cv-yarat")} className="hidden text-body transition hover:text-brand-dark xl:block">{t.nav.cv}</Link>
           <Link href={localePath(locale, "/qiymetler")} className="hidden text-body transition hover:text-brand-dark md:block">{t.nav.pricing}</Link>
+          <Link href={localePath(locale, "/blog")} className="hidden text-body transition hover:text-brand-dark md:block">{getExtra(locale).blog.nav}</Link>
           <Suspense fallback={null}><LanguageSwitcher locale={locale} label={t.site.langLabel} /></Suspense>
           <ThemeSwitcher t={t.theme} />
           <Link href={localePath(locale, "/elan-yerlesdir")} aria-label={t.nav.post} className="hidden rounded-lg bg-brand px-3 py-1.5 font-medium text-on-brand transition hover:opacity-90 active:scale-95 md:block">
