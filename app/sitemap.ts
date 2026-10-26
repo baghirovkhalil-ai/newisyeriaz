@@ -20,6 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...entry("/", { changeFrequency: "daily", priority: 1 }),
     ...entry("/vakansiyalar", { changeFrequency: "hourly", priority: 0.9 }),
+    ...entry("/cv-yarat", { changeFrequency: "monthly", priority: 0.7 }),
     ...entry("/qiymetler", { changeFrequency: "monthly", priority: 0.6 }),
     ...combos.flatMap((c) => entry(`/is-elanlari/${c.city}/${c.category}`, { changeFrequency: "daily", priority: 0.7 })),
     ...vacancies.flatMap((v) => entry(`/vakansiya/${v.slug}`, { lastModified: v.publishedAt, priority: 0.8 })),

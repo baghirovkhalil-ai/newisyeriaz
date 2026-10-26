@@ -1,5 +1,11 @@
 # Dəyişikliklər
 
+## 0.5.0 — CV yarat, yeni qiymətlər
+- Yeni səhifə `/cv-yarat` (3 dildə): 4 nümunə CV (satış, mühasib, İT, kuryer), CV üçün 5 məsləhət.
+- "CV yarat" düymələri KarYera AI-a (karyera-ai.vercel.app) aparır, UTM ilə (`utm_source=isyeri`). Linki `NEXT_PUBLIC_KARYERA_URL` ilə dəyişmək olar.
+- Header, mobil menyu (5 element), footer və ana səhifəyə CV linkləri/banneri; sitemap-ə `/cv-yarat`.
+- Qiymətlər: Biznes 29 → 20 AZN, Korporativ 79 → 39 AZN.
+
 ## 0.4.0 — Mobil, paketlər, abunə, yeni footer
 - Mobil: aşağı naviqasiya zolağı, bütün sahələr çip kimi, kəsilməyən sahə adları, böyük toxunma sahələri, 16px giriş xanaları, safe-area dəstəyi.
 - Qiymətlər səhifəsi `/qiymetler` (3 paket, aylıq/illik, FAQ) və `?plan=` ilə elan formasına keçid. Qiymətlər nümunədir.

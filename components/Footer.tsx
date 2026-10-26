@@ -52,6 +52,7 @@ export default async function Footer({ locale, t }: { locale: Locale; t: Dict })
                   <Link href={`${list}?category=${c.slug}`} className={link}><span aria-hidden="true" className="mr-1.5">{categoryIcons[c.slug]}</span>{c.name}</Link>
                 </li>
               ))}
+              <li><Link href={p("/cv-yarat")} className={link}><span aria-hidden="true" className="mr-1.5">📄</span>{t.footer.cv}</Link></li>
               <li><Link href={list} className={`${link} font-medium text-brand-dark`}>{t.footer.allJobs} →</Link></li>
             </ul>
           </nav>

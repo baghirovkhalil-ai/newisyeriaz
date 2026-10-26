@@ -1,8 +1,8 @@
 // Paketlərin qiymətləri (AZN/ay). Mətnlər lib/dictionaries.ts-dədir. Qiymətlər NÜMUNƏDİR, ödəniş qoşulanda dəqiqləşdirilməlidir.
 export const plans = [
   { id: "free", monthly: 0, popular: false },
-  { id: "pro", monthly: 29, popular: true },
-  { id: "business", monthly: 79, popular: false },
+  { id: "pro", monthly: 20, popular: true },
+  { id: "business", monthly: 39, popular: false },
 ] as const;
 
 export type PlanId = (typeof plans)[number]["id"];

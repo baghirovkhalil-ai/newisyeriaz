@@ -4,6 +4,7 @@ import SearchForm from "@/components/SearchForm";
 import VacancyCard from "@/components/VacancyCard";
 import Reveal from "@/components/Reveal";
 import CountUp from "@/components/CountUp";
+import { karyeraLink } from "@/lib/cv-samples";
 import { getCategories, getCategoryCounts, getCities, getVacancies } from "@/lib/data";
 import { getDict } from "@/lib/dictionaries";
 import { categoryIcons } from "@/lib/icons";
@@ -97,6 +98,22 @@ export default async function Home({ params }: Props) {
           <Link href={list} className="inline-block rounded-lg border border-brand px-5 py-2.5 text-sm font-medium text-brand-dark transition hover:bg-brand-soft active:scale-95">{t.home.viewAllN.replace("{n}", String(all.length))}</Link>
         </div>
       </section>
+
+      <Reveal>
+        <section className="flex flex-col gap-4 rounded-2xl bg-brand-soft p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+          <div className="flex items-center gap-3">
+            <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand/15 text-xl">📄</span>
+            <div>
+              <h2 className="text-lg font-medium">{t.home.cvTitle}</h2>
+              <p className="text-sm text-body">{t.home.cvText}</p>
+            </div>
+          </div>
+          <div className="flex shrink-0 flex-wrap gap-2">
+            <a href={karyeraLink("home_banner")} target="_blank" rel="noopener" className="inline-block rounded-lg bg-brand px-5 py-3 text-sm font-medium text-on-brand transition hover:opacity-90 active:scale-95">{t.home.cvBtn} ↗</a>
+            <Link href={localePath(locale, "/cv-yarat")} className="inline-block rounded-lg border border-brand bg-surface px-5 py-3 text-sm font-medium text-brand-dark transition hover:bg-surface/70 active:scale-95">{t.home.cvSamples}</Link>
+          </div>
+        </section>
+      </Reveal>
 
       <Reveal>
         <section className="relative overflow-hidden rounded-2xl border border-brand-line p-6 text-center">
