@@ -8,6 +8,7 @@ export const cityNames: Record<string, Record<Locale, [string, string]>> = {
   mingecevir: { az: ["Mingəçevir", "Mingəçevirdə"], ru: ["Мингечевир", "в Мингечевире"], en: ["Mingachevir", "in Mingachevir"] },
   lenkeran: { az: ["Lənkəran", "Lənkəranda"], ru: ["Ленкорань", "в Ленкорани"], en: ["Lankaran", "in Lankaran"] },
   seki: { az: ["Şəki", "Şəkidə"], ru: ["Шеки", "в Шеки"], en: ["Sheki", "in Sheki"] },
+  regionlar: { az: ["Regionlar", "regionlarda"], ru: ["Регионы", "в регионах"], en: ["Regions", "in the regions"] },
 };
 
 export const categoryNames: Record<string, Record<Locale, string>> = {

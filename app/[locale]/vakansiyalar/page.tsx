@@ -23,7 +23,7 @@ export default async function VacanciesPage({ params, searchParams }: { params: 
   const [categories, cities, list] = await Promise.all([
     getCategories(locale),
     getCities(locale),
-    getVacancies(locale, { ...filters, minSalary: filters.minSalary ? Number(filters.minSalary) : undefined }),
+    getVacancies(locale, { ...filters, minSalary: filters.minSalary ? Number(filters.minSalary) : undefined }, { external: true }),
   ]);
 
   const totalPages = Math.max(1, Math.ceil(list.length / PAGE_SIZE));

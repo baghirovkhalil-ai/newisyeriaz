@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = getDict(locale);
   const [city, category] = await Promise.all([getCityBySlug(locale, params.city), getCategoryBySlug(locale, params.category)]);
   if (!city || !category) return {};
-  const count = (await getVacancies(locale, { city: city.slug, category: category.slug })).length;
+  const count = (await getVacancies(locale, { city: city.slug, category: category.slug }, { external: true })).length;
   const vars = { loc: city.loc, city: city.name, cat: category.name.toLocaleLowerCase(locale) };
   return {
     robots: count === 0 ? { index: false, follow: true } : undefined,
@@ -34,7 +34,7 @@ export default async function LandingPage({ params }: Props) {
   const [city, category] = await Promise.all([getCityBySlug(locale, params.city), getCategoryBySlug(locale, params.category)]);
   if (!city || !category) notFound();
 
-  const list = await getVacancies(locale, { city: city.slug, category: category.slug });
+  const list = await getVacancies(locale, { city: city.slug, category: category.slug }, { external: true });
   const vars = { loc: city.loc, city: city.name, cat: category.name.toLocaleLowerCase(locale) };
 
   return (

@@ -5,6 +5,7 @@ import type { Locale } from "./i18n";
 const az = {
   nav: { cvdb: "CV bazası" },
   card: { gold: "Gold", premium: "Premium" },
+  ext: { open: "Elanı aç" },
   home: {
     goldTitle: "Gold vakansiyalar",
     goldCta: "Elanını Gold et",
@@ -187,6 +188,7 @@ export type Extra = typeof az;
 const ru: Extra = {
   nav: { cvdb: "База резюме" },
   card: { gold: "Gold", premium: "Premium" },
+  ext: { open: "Открыть вакансию" },
   home: {
     goldTitle: "Gold вакансии",
     goldCta: "Сделать объявление Gold",
@@ -367,6 +369,7 @@ const ru: Extra = {
 const en: Extra = {
   nav: { cvdb: "CV database" },
   card: { gold: "Gold", premium: "Premium" },
+  ext: { open: "Open listing" },
   home: {
     goldTitle: "Gold jobs",
     goldCta: "Make your listing Gold",

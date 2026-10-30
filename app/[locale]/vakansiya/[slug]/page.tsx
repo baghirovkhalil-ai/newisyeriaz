@@ -34,7 +34,7 @@ export default async function VacancyPage({ params }: Props) {
   const v = await getVacancyBySlug(locale, params.slug);
   if (!v) notFound();
 
-  const similar = (await getVacancies(locale, { category: v.category.slug })).filter((x) => x.id !== v.id).slice(0, 2);
+  const similar = (await getVacancies(locale, { category: v.category.slug }, { external: true })).filter((x) => x.id !== v.id).slice(0, 2);
   const tel = v.contactPhone?.replace(/\s/g, "");
 
   return (

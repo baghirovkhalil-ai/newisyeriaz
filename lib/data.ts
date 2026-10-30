@@ -2,6 +2,7 @@ import type { Locale } from "./i18n";
 import { normalize } from "./i18n";
 import { categoryNames, cityNames, districtNames, templateTr } from "./content-i18n";
 import { byTier, type Tier } from "./boosts";
+import { loadFeed, toExternalView } from "./external";
 
 export type Schedule = "full_time" | "part_time" | "shift" | "remote" | "internship";
 
@@ -31,6 +32,8 @@ export interface Vacancy {
   publishedAt: string;
   expiresAt: string;
   tpl?: number;
+  /** Başqa iş saytından gətirilən elan: kart orijinal elana aparır */
+  external?: { url: string; source: string };
 }
 export interface VacancyView extends Vacancy { company: Company; category: Category; city: City }
 
@@ -42,6 +45,7 @@ const cities: City[] = [
   { id: 4, name: "Mingəçevir", slug: "mingecevir", loc: "" },
   { id: 5, name: "Lənkəran", slug: "lenkeran", loc: "" },
   { id: 6, name: "Şəki", slug: "seki", loc: "" },
+  { id: 7, name: "Regionlar", slug: "regionlar", loc: "" },
 ];
 
 const bakuDistricts = ["Nəsimi", "Yasamal", "Nərimanov", "Nizami", "Xətai", "Binəqədi", "Səbail", "Suraxanı", "Sabunçu", "Xəzər", "Qaradağ", "Pirallahı"];
@@ -181,9 +185,10 @@ export interface Filters {
   minSalary?: number;
 }
 
-export async function getVacancies(locale: Locale, f: Filters = {}): Promise<VacancyView[]> {
+/** opts.external: digər saytlardan gətirilən elanları da qoş (yalnız Vakansiyalar siyahısı və sahə səhifələri) */
+export async function getVacancies(locale: Locale, f: Filters = {}, opts: { external?: boolean } = {}): Promise<VacancyView[]> {
   const q = f.q?.trim() ? normalize(f.q.trim()) : "";
-  return vacancies
+  const own = vacancies
     .filter((raw) => {
       const v = toView(raw, locale);
       if (q && !normalize(`${v.title} ${raw.title} ${v.company.name} ${v.description} ${v.city.name} ${cityNames[v.city.slug].az[0]}`).includes(q)) return false;
@@ -193,8 +198,19 @@ export async function getVacancies(locale: Locale, f: Filters = {}): Promise<Vac
       if (f.minSalary && (v.salaryMax ?? v.salaryMin ?? 0) < f.minSalary) return false;
       return true;
     })
-    .map((raw) => toView(raw, locale))
-    .sort(byTier);
+    .map((raw) => toView(raw, locale));
+  if (!opts.external || f.schedule || f.minSalary) return own.sort(byTier); // qrafik/maaş məlum deyil: bu süzgəclərdə göstərilmir
+  const cats = categories.map((c) => localeCat(c, locale)), cts = cities.map((c) => localeCity(c, locale));
+  const ext = (await loadFeed())
+    .map((j) => toExternalView(j, cats, cts))
+    .filter((v): v is VacancyView => !!v)
+    .filter((v) => {
+      if (q && !normalize(`${v.title} ${v.company.name} ${v.city.name}`).includes(q)) return false;
+      if (f.category && v.category.slug !== f.category) return false;
+      if (f.city && v.city.slug !== f.city) return false;
+      return true;
+    });
+  return [...own, ...ext].sort(byTier);
 }
 
 export async function getVacancyBySlug(locale: Locale, slug: string) {

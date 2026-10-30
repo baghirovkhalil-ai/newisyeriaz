@@ -8,6 +8,34 @@ import TierBadge, { tierFrame } from "./TierBadge";
 
 export default function VacancyCard({ v, locale, t }: { v: VacancyView; locale: Locale; t: Dict }) {
   const x = getExtra(locale);
+  if (v.external) {
+    // Başqa saytdan gətirilən elan: orijinal elana aparır, maaş və qrafik məlum olmadığı üçün göstərilmir
+    return (
+      <a
+        href={v.external.url}
+        target="_blank"
+        rel="noopener nofollow"
+        className="group relative block h-full overflow-hidden rounded-xl border bg-surface p-4 transition duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-lg hover:shadow-brand/15 active:translate-y-0 active:scale-[.99]"
+      >
+        <div className="relative flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <h3 className="text-base font-medium text-ink">{v.title}</h3>
+            <p className="mt-0.5 text-sm text-muted">{v.company.name}</p>
+          </div>
+          <span className="shrink-0 rounded-md border border-brand-line px-2 py-0.5 text-xs text-muted">{v.external.source}</span>
+        </div>
+        <div className="relative mt-3 flex items-center justify-between">
+          <p className="text-sm font-medium text-brand-dark">{x.ext.open}</p>
+          <span aria-hidden="true" className="text-brand transition duration-300 group-hover:translate-x-0.5">↗</span>
+        </div>
+        <div className="relative mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted">
+          <span>{v.city.name}</span>
+          <span>{v.category.name}</span>
+          <span>{formatDate(t.date, v.publishedAt)}</span>
+        </div>
+      </a>
+    );
+  }
   return (
     <Link
       href={localePath(locale, `/vakansiya/${v.slug}`)}
